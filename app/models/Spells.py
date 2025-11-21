@@ -20,4 +20,4 @@ class DefensiveSpell(Spell):
 
 class HealthSpell(Spell):
     def execute(self):
-        return f"CASTING HELTH SPELL: {self.name}! Health restored."
+        return f"CASTING HEALTH SPELL: {self.name}! Health restored."

@@ -15,8 +15,8 @@ class EventFactory:
         elif event_name == "Tree":
             return DefensiveEvents("Tree", "Defensive", 30)
         
-        elif event_name == "Whater":
-            return UtilityEvents("Whater", "Health", 5)
+        elif event_name == "Water":
+            return UtilityEvents("Water", "Health", 5)
             
         elif event_name == "Light":
             return UtilityEvents("Light", "Health", 10)

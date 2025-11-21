@@ -18,8 +18,8 @@ class SpellFactory:
         elif spell_name == "Divine":
             return HealthSpell("Divine", "Health", 5)
             
-        elif spell_name == "Recober":
-            return HealthSpell("Recober", "Health", 10)
+        elif spell_name == "Recover":
+            return HealthSpell("Recover", "Health", 10)
         
         else:
             raise ValueError(f"The spell '{spell_name}' is not known in the Ministry database.")
