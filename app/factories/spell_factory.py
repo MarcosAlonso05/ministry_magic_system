@@ -1,4 +1,4 @@
-from app.models.Spells import Spell, OffensiveSpell, DefensiveSpell, UtilitySpell
+from app.models.Spells import Spell, OffensiveSpell, DefensiveSpell, HealthSpell
 
 class SpellFactory:
     @staticmethod
@@ -6,21 +6,20 @@ class SpellFactory:
         
         spell_name = spell_name.title()
 
-        if spell_name == "Expelliarmus":
-            return OffensiveSpell("Expelliarmus", "Offensive", 50)
+        if spell_name == "FireBall":
+            return OffensiveSpell("FireBall", "Offensive", 50)
         
-        elif spell_name == "Stupefy":
-            return OffensiveSpell("Stupefy", "Offensive", 40)
+        elif spell_name == "Flipendo":
+            return OffensiveSpell("Flipendo", "Offensive", 40)
 
         elif spell_name == "Protego":
             return DefensiveSpell("Protego", "Defensive", 30)
         
-        elif spell_name == "Lumos":
-            return UtilitySpell("Lumos", "Utility", 5)
+        elif spell_name == "Divine":
+            return HealthSpell("Divine", "Health", 5)
             
-        elif spell_name == "Alohomora":
-            return UtilitySpell("Alohomora", "Utility", 10)
+        elif spell_name == "Recober":
+            return HealthSpell("Recober", "Health", 10)
         
         else:
-            # Default generic spell or error
             raise ValueError(f"The spell '{spell_name}' is not known in the Ministry database.")

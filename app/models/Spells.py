@@ -18,6 +18,6 @@ class DefensiveSpell(Spell):
     def execute(self):
         return f"CASTING DEFENSIVE SPELL: {self.name}! Shield activated."
 
-class UtilitySpell(Spell):
+class HealthSpell(Spell):
     def execute(self):
-        return f"CASTING UTILITY SPELL: {self.name}! Environment changed."
+        return f"CASTING HELTH SPELL: {self.name}! Health restored."
