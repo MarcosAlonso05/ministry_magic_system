@@ -2,87 +2,67 @@ import logging
 import functools
 from fastapi import HTTPException
 
-# Configure Logger
+from app.data.magic_catalog import SPELL_DATA, EVENT_DATA
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("MinistryLog")
+
+def validate_magic_permission(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        user = kwargs.get('user')
+        magic_name = kwargs.get('magic_name')
+        is_event = kwargs.get('is_event', False)
+
+        if not user or not magic_name:
+            raise HTTPException(status_code=400, detail="Missing context (user or magic name).")
+
+        if is_event:
+            catalog = EVENT_DATA
+            catalog_type = "Event"
+        else:
+            catalog = SPELL_DATA
+            catalog_type = "Spell"
+
+        found_key = next((k for k in catalog.keys() if k.lower() == magic_name.lower()), None)
+
+        if not found_key:
+            logger.error(f"SECURITY: Unknown magic '{magic_name}' requested by {user.username}.")
+            raise HTTPException(status_code=404, detail=f"{catalog_type} '{magic_name}' not found in Ministry records.")
+
+        required_perm = catalog[found_key]['perm']
+
+        if not user.has_permission(required_perm):
+            logger.warning(f"SECURITY: Access Denied. {user.username} (Role: {user.role}) tried to cast '{found_key}' which requires '{required_perm}'.")
+            raise HTTPException(status_code=403, detail=f"Forbidden: This magic requires '{required_perm}' clearance.")
+
+        return func(*args, **kwargs)
+
+    return wrapper
 
 def audit_log(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        # 1. Extract info for the log (Safe extraction)
         user = kwargs.get('user')
         username = user.username if user else "Unknown"
-        magic_name = kwargs.get('magic_name', 'Unknown Magic')
+        magic_name = kwargs.get('magic_name', 'Unknown')
 
-        # 2. LOG BEFORE: The wizard is about to start
-        logger.info(f"AUDIT: User '{username}' is invoking '{magic_name}'...")
-
+        logger.info(f"AUDIT [START]: Wizard '{username}' invoking '{magic_name}'...")
         try:
-            # 3. EXECUTE THE REAL FUNCTION
-            # This is the moment the spell is actually cast
             result = func(*args, **kwargs)
-            
-            # 4. LOG AFTER (SUCCESS)
-            logger.info(f"AUDIT: Success. '{magic_name}' finished.")
+            logger.info(f"AUDIT [SUCCESS]: '{magic_name}' performed.")
             return result
-        
         except Exception as e:
-            # 5. LOG AFTER (FAILURE)
-            logger.error(f"AUDIT: Failed. '{magic_name}' caused error: {e}")
-            raise e # Important: Don't hide the error, let it bubble up
-
+            logger.error(f"AUDIT [FAILURE]: '{magic_name}' failed. Error: {str(e)}")
+            raise e
     return wrapper
 
 def magic_transaction(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        # 1. Start Transaction context
-        # (In a real DB, here we would do: db.begin())
-        
         try:
-            # 2. Execute functionality
-            result = func(*args, **kwargs)
-            
-            # 3. Commit (Save changes)
-            # (In a real DB: db.commit())
-            return result
-            
-        except Exception as e:
-            # 4. Rollback (Undo changes)
-            logger.critical(f"TRANSACTION: Critical error in magic core. Rolling back.")
-            # (In a real DB: db.rollback())
-            
-            # Re-raise the error so the user knows it failed
-            raise e
-            
-    return wrapper
-
-def require_permission(permission_needed: str):
-    # LAYER 1: Receives the argument ("cast_offensive")
-    
-    def decorator(func):
-        # LAYER 2: Receives the function (cast_spell)
-        
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            # LAYER 3: Receives the call arguments (user=Harry)
-            
-            # A. Get the user from the arguments
-            current_user = kwargs.get('user')
-            
-            if not current_user:
-                raise HTTPException(status_code=401, detail="Unauthorized: No user credentials.")
-
-            # B. Check permissions using the User model logic
-            # This connects the decorator to your User.py file logic
-            if not current_user.has_permission(permission_needed):
-                
-                # C. If check fails, STOP EVERYTHING.
-                logger.warning(f"SECURITY: {current_user.username} denied access to {permission_needed}.")
-                raise HTTPException(status_code=403, detail="Forbidden: Insufficient permissions.")
-
-            # D. If check passes, allow the function to run
             return func(*args, **kwargs)
-            
-        return wrapper
-    return decorator
+        except Exception as e:
+            logger.critical("TRANSACTION: Rolling back magic changes due to error.")
+            raise e
+    return wrapper
