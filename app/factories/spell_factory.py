@@ -1,25 +1,24 @@
 from app.models.Spells import Spell, OffensiveSpell, DefensiveSpell, HealthSpell
+from app.data.magic_catalog import SPELL_DATA
 
 class SpellFactory:
     @staticmethod
     def create_spell(spell_name: str) -> Spell:
-        
-        spell_name = spell_name.title()
+        key_name = next((k for k in SPELL_DATA.keys() if k.lower() == spell_name.lower()), None)
 
-        if spell_name == "FireBall":
-            return OffensiveSpell("FireBall", "Offensive", 50)
-        
-        elif spell_name == "Flipendo":
-            return OffensiveSpell("Flipendo", "Offensive", 40)
+        if not key_name:
+            raise ValueError(f"Spell '{spell_name}' not found in Ministry Grimoire.")
 
-        elif spell_name == "Protego":
-            return DefensiveSpell("Protego", "Defensive", 30)
-        
-        elif spell_name == "Divine":
-            return HealthSpell("Divine", "Health", 5)
-            
-        elif spell_name == "Recover":
-            return HealthSpell("Recover", "Health", 10)
-        
+        data = SPELL_DATA[key_name]
+        spell_type = data["type"]
+        cost = data["cost"]
+        perm = data["perm"]
+
+        if spell_type == "offensive":
+            return OffensiveSpell(key_name, spell_type, cost, perm)
+        elif spell_type == "defensive":
+            return DefensiveSpell(key_name, spell_type, cost, perm)
+        elif spell_type == "health":
+            return HealthSpell(key_name, spell_type, cost, perm)
         else:
-            raise ValueError(f"The spell '{spell_name}' is not known in the Ministry database.")
+            raise ValueError(f"Unknown spell type: {spell_type}")

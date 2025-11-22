@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 
 class MagicEvents(ABC):
-    def __init__(self, name: str, event_type: str, mana_cost: int):
+    def __init__(self, name: str, event_type: str, mana_cost: int, required_permission: str):
         self.name = name
         self.event_type = event_type
         self.mana_cost = mana_cost
+        self.required_permission = required_permission
 
     @abstractmethod
     def execute(self):

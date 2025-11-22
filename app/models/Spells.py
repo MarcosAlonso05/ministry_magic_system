@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 
 class Spell(ABC):
-    def __init__(self, name: str, spell_type: str, mana_cost: int):
+    def __init__(self, name: str, spell_type: str, mana_cost: int, required_permission: str):
         self.name = name
         self.spell_type = spell_type
         self.mana_cost = mana_cost
+        self.required_permission = required_permission
 
     @abstractmethod
     def execute(self):
