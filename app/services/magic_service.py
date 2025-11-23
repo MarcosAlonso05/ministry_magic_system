@@ -1,6 +1,5 @@
 from app.factories.spell_factory import SpellFactory
 from app.factories.events_factory import EventFactory
-# Import our new smart decorator
 from app.decorators import audit_log, magic_transaction, validate_magic_permission
 from app.models.User import User
 

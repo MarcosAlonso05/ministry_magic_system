@@ -1,10 +1,19 @@
 import logging
 import functools
+import sys
 from fastapi import HTTPException
 
 from app.data.magic_catalog import SPELL_DATA, EVENT_DATA
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("docs/ministry_audit.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+
 logger = logging.getLogger("MinistryLog")
 
 def validate_magic_permission(func):
