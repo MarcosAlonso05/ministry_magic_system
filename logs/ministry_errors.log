@@ -1,0 +1,18 @@
+2025-11-23 18:43:22,827 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Sparks' requested by marcos.
+2025-11-23 18:43:22,827 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Sparks' failed. Error: 404: Spell 'Sparks' not found in Ministry records.
+2025-11-23 18:43:22,827 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 18:43:41,405 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 18:43:41,405 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 18:43:41,405 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 18:43:48,548 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Tornado' requested by gandalf.
+2025-11-23 18:43:48,548 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Tornado' failed. Error: 404: Spell 'Tornado' not found in Ministry records.
+2025-11-23 18:43:48,550 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 18:44:09,227 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 18:44:09,227 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 18:44:09,227 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 18:44:20,685 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Tornado' requested by gandalf.
+2025-11-23 18:44:20,685 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Tornado' failed. Error: 404: Spell 'Tornado' not found in Ministry records.
+2025-11-23 18:44:20,685 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 18:44:25,164 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Tornado' requested by gandalf.
+2025-11-23 18:44:25,164 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Tornado' failed. Error: 404: Spell 'Tornado' not found in Ministry records.
+2025-11-23 18:44:25,166 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.

@@ -2,7 +2,9 @@ import logging
 import functools
 import time
 from fastapi import HTTPException
+
 from app.data.monitoring import record_spell_metric
+
 from app.data.magic_catalog import SPELL_DATA, EVENT_DATA
 
 logger = logging.getLogger("MinistryLog")

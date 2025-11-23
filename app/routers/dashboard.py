@@ -4,7 +4,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import io
 import base64
-from app.monitoring import metrics_history, update_system_metrics, SPELL_COUNTER
+
+from app.data.monitoring import metrics_history, update_system_metrics, SPELL_COUNTER
 from prometheus_client import generate_latest
 
 matplotlib.use('Agg')
@@ -63,7 +64,7 @@ def get_dashboard_ui():
         </head>
         <body>
             <div class="container">
-                <h1> Ministry of Magic - Real Time Dashboard</h1>
+                <h1>Ministry of Magic - Real Time Dashboard</h1>
                 
                 <h2>System Performance</h2>
                 <img src="data:image/png;base64,{img_base64}" />

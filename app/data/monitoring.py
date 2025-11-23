@@ -11,7 +11,7 @@ SPELL_COUNTER = Counter(
 SPELL_LATENCY = Histogram(
     "magic_spell_latency_seconds",
     "Time taken to process magic",
-    buckets=[0.1, 0.5, 1.0, 2.0, 5.0] # Time buckets
+    buckets=[0.1, 0.5, 1.0, 2.0, 5.0]
 )
 
 SYSTEM_CPU = Gauge("system_cpu_usage_percent", "Current CPU usage percentage")

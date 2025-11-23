@@ -9,12 +9,8 @@ users_db = {
 }
 
 def get_current_user(x_user_id: str = Header(...)) -> User:
-    
-    user_key = x_user_id.lower() 
-    
+    user_key = x_user_id.lower()
     user = users_db.get(user_key)
-    
     if not user:
         raise HTTPException(status_code=400, detail="User not found in Ministry records")
-    
     return user
