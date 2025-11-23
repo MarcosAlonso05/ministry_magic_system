@@ -16,3 +16,23 @@
 2025-11-23 18:44:25,164 - MinistryLog - ERROR - decorators:43 - SECURITY: Unknown magic 'Tornado' requested by gandalf.
 2025-11-23 18:44:25,164 - MinistryLog - ERROR - decorators:86 - AUDIT [FAILURE]: 'Tornado' failed. Error: 404: Spell 'Tornado' not found in Ministry records.
 2025-11-23 18:44:25,166 - MinistryLog - CRITICAL - decorators:105 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 19:02:52,875 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'RockThrow' requested by gandalf.
+2025-11-23 19:02:52,875 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'RockThrow' failed. Error: 404: Spell 'RockThrow' not found in Ministry records.
+2025-11-23 19:02:52,875 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:48:54,442 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'Sparks' requested by gandalf.
+2025-11-23 21:48:54,443 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'Sparks' failed. Error: 404: Spell 'Sparks' not found in Ministry records.
+2025-11-23 21:48:54,443 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:49:00,930 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 21:49:00,930 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 21:49:00,931 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:49:07,593 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 21:49:07,593 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 21:49:07,593 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:49:13,052 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 21:49:13,052 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 21:49:13,053 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:49:18,415 - MinistryLog - ERROR - decorators:32 - SECURITY: Unknown magic 'Meteor' requested by gandalf.
+2025-11-23 21:49:18,415 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'Meteor' failed. Error: 404: Spell 'Meteor' not found in Ministry records.
+2025-11-23 21:49:18,415 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.
+2025-11-23 21:55:50,529 - MinistryLog - ERROR - decorators:70 - AUDIT [FAILURE]: 'fireball' failed. Error: 403: Forbidden: This magic requires 'cast_advanced' clearance.
+2025-11-23 21:55:50,529 - MinistryLog - CRITICAL - decorators:86 - TRANSACTION: Rolling back magic changes due to error.

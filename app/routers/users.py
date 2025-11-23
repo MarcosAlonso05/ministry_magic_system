@@ -42,7 +42,7 @@ def create_new_user(user_data: Dict[str, str] = Body(...)):
 
 @router.post("/verify-admin")
 def verify_admin(password: Dict[str, str] = Body(...)):
-    if password.get("password") == "Albus":
+    if password.get("password") == "1234":
         return {"status": "success"}
     raise HTTPException(status_code=401, detail="Wrong password")
 

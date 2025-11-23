@@ -99,7 +99,7 @@
             border-radius: 20px; 
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            z-index: 1000; /* Ensure it's on top */
+            z-index: 1000;
             font-size: 0.9rem;
             border: 2px solid #fff;
         }
@@ -353,8 +353,8 @@
 
     function loginUser(user) {
         if(user.username === 'admin') {
-            const p = prompt("Password required for Level 10 clearance:");
-            if(p !== "Albus") { alert("Access Denied"); return; }
+            const p = prompt("Password required:");
+            if(p !== "1234") { alert("Access Denied"); return; }
         }
         currentUser = user;
         const badge = document.getElementById('badge');
@@ -384,7 +384,7 @@
     }
 
     function startBattlePreCheck() {
-        if(!currentUser) { alert("Select a character first!"); return; }
+        if(!currentUser) { alert("Select a character first"); return; }
         startBattle();
     }
 
@@ -507,7 +507,7 @@
         document.getElementById('heroCard').classList.remove('defending');
 
         if(currentUser.role !== 'admin' && battle.hero.current_mana < magic.cost) {
-            log("Not enough mana!", "info");
+            log("Not enough mana", "info");
             return;
         }
 

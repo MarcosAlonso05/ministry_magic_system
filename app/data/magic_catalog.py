@@ -48,5 +48,5 @@ ROLE_STATS = {
     "3_year_student": {"hp": 250, "mana": 200},
     "4_year_student": {"hp": 400, "mana": 350},
     "teacher":        {"hp": 800, "mana": 800},
-    "admin":          {"hp": 9999, "mana": 9999}, # GOD MODE
+    "admin":          {"hp": 9999, "mana": 9999},
 }

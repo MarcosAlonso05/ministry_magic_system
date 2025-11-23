@@ -17,4 +17,4 @@ app.include_router(users.router)
 
 @app.get("/")
 def read_root():
-    return {"message": "Ministry System Online. Go to /static/index.html to enter the Training Club."}
+    return {"message": "Ministry System Online. Go to /static/index.html"}
