@@ -1,6 +1,7 @@
 import logging
 import functools
 import sys
+import inspect
 from fastapi import HTTPException
 
 from app.data.magic_catalog import SPELL_DATA, EVENT_DATA
@@ -18,7 +19,7 @@ logger = logging.getLogger("MinistryLog")
 
 def validate_magic_permission(func):
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         user = kwargs.get('user')
         magic_name = kwargs.get('magic_name')
         is_event = kwargs.get('is_event', False)
@@ -45,20 +46,20 @@ def validate_magic_permission(func):
             logger.warning(f"SECURITY: Access Denied. {user.username} (Role: {user.role}) tried to cast '{found_key}' which requires '{required_perm}'.")
             raise HTTPException(status_code=403, detail=f"Forbidden: This magic requires '{required_perm}' clearance.")
 
-        return func(*args, **kwargs)
+        return await func(*args, **kwargs)
 
     return wrapper
 
 def audit_log(func):
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         user = kwargs.get('user')
         username = user.username if user else "Unknown"
         magic_name = kwargs.get('magic_name', 'Unknown')
 
         logger.info(f"AUDIT [START]: Wizard '{username}' invoking '{magic_name}'...")
         try:
-            result = func(*args, **kwargs)
+            result = await func(*args, **kwargs)
             logger.info(f"AUDIT [SUCCESS]: '{magic_name}' performed.")
             return result
         except Exception as e:
@@ -68,9 +69,9 @@ def audit_log(func):
 
 def magic_transaction(func):
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         try:
-            return func(*args, **kwargs)
+            return await func(*args, **kwargs)
         except Exception as e:
             logger.critical("TRANSACTION: Rolling back magic changes due to error.")
             raise e
