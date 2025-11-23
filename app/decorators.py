@@ -1,19 +1,9 @@
 import logging
 import functools
-import sys
-import inspect
+import time
 from fastapi import HTTPException
-
+from app.data.monitoring import record_spell_metric
 from app.data.magic_catalog import SPELL_DATA, EVENT_DATA
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("docs/ministry_audit.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
 
 logger = logging.getLogger("MinistryLog")
 
@@ -56,15 +46,33 @@ def audit_log(func):
         user = kwargs.get('user')
         username = user.username if user else "Unknown"
         magic_name = kwargs.get('magic_name', 'Unknown')
+        
+        magic_type = "unknown"
+        if magic_name:
+            combined = {**SPELL_DATA, **EVENT_DATA}
+            key = next((k for k in combined.keys() if k.lower() == magic_name.lower()), None)
+            if key:
+                magic_type = combined[key]["type"]
 
-        logger.info(f"AUDIT [START]: Wizard '{username}' invoking '{magic_name}'...")
+        logger.info(f"AUDIT [START]: Wizard '{username}' invoking '{magic_name}' ({magic_type})...")
+        
+        start_time = time.time()
+        status = "success"
+        
         try:
             result = await func(*args, **kwargs)
             logger.info(f"AUDIT [SUCCESS]: '{magic_name}' performed.")
             return result
         except Exception as e:
+            status = "error"
             logger.error(f"AUDIT [FAILURE]: '{magic_name}' failed. Error: {str(e)}")
             raise e
+        finally:
+            end_time = time.time()
+            duration = end_time - start_time
+            
+            record_spell_metric(spell_type=magic_type, status=status, duration=duration)
+
     return wrapper
 
 def magic_transaction(func):

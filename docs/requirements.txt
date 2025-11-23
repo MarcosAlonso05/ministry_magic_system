@@ -1,2 +1,4 @@
 pip install fastapi uvicorn
 pip install psutil
+pip install prometheus-client matplotlib
+pip install httpx
